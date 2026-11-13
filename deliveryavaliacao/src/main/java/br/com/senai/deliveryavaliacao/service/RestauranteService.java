@@ -20,12 +20,6 @@ public class RestauranteService {
 
     public Restaurante cadastrarRestaurante(Restaurante restaurante) {
 
-        //Restaurante restaurante2 = new Restaurante();
-        //restaurante2.setNome(restaurante.getNome());
-       // restaurante2.setEndereco(restaurante.getEndereco());
-
-       // return Optional.of(restauranteRepository.save(restaurante2));
-
        return restauranteRepository.save(restaurante);
     }
 
@@ -44,15 +38,11 @@ public class RestauranteService {
             return null;
         }
 
-        Restaurante restaurante = restauranteEncontrado.get();
-        restaurante.setNome(novosDados.getNome());
-        restaurante.setEndereco(novosDados.getEndereco());
+        Restaurante restaurante2 = restauranteEncontrado.get();
+        restaurante2.setNome(novosDados.getNome());
+        restaurante2.setEndereco(novosDados.getEndereco());
 
-        return restauranteRepository.save(restaurante);
-    }
-
-     public void excluirRestaurante(Integer id) {
-        restauranteRepository.deleteById(id);
+        return restauranteRepository.save(restaurante2);
     }
 
 }

@@ -2,7 +2,6 @@ package br.com.senai.deliveryavaliacao.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity 
 @Table (name = "produtos")
@@ -17,16 +19,20 @@ public class Produto {
 
     @Id 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
+    @NotNull  (message = "Informe o nome do produto")
+    @NotBlank (message = "Informe o nome do produto")
     private String nome;
 
-    @Column (precision = 10, scale = 2)
+    
+    @Min (0)
+    @NotNull (message = "Informe o preço")
     private BigDecimal preco;
 
     @ManyToOne 
     @JoinColumn (name = "restaurante_id", nullable = false)
-    Restaurante restaurante;
+    private Restaurante restauranteId;
 
     public Produto() {
 
@@ -52,12 +58,12 @@ public class Produto {
         this.preco = preco;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public Restaurante getRestauranteId() {
+        return restauranteId;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setRestauranteId(Restaurante restaurante) {
+        this.restauranteId = restaurante;
     }
 
 }

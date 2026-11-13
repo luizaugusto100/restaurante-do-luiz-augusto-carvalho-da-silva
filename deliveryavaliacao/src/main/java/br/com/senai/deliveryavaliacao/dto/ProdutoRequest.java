@@ -2,21 +2,25 @@ package br.com.senai.deliveryavaliacao.dto;
 
 import java.math.BigDecimal;
 
-import br.com.senai.deliveryavaliacao.model.Restaurante;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ProdutoRequest {
 
+    @NotNull  (message = "Informe o nome do produto")
+    @NotBlank (message = "Informe o nome do produto")
     private String nome;
 
-    @Column (precision = 10, scale = 2)
+    
+    @Min (0)
+    @NotNull (message = "Informe o preço")
     private BigDecimal preco;
 
-    @ManyToOne 
-    @JoinColumn (name = "restaurante_id", nullable = false)
-    Restaurante restaurante;
+    
+    @NotNull (message = "O restaurante não pode ser nulo")
+    Integer restauranteId;
 
     public ProdutoRequest() {
 
@@ -38,12 +42,12 @@ public class ProdutoRequest {
         this.preco = preco;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public Integer getRestauranteId() {
+        return restauranteId;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setRestauranteId(Integer restaurante) {
+        this.restauranteId = restaurante;
     }
 
 }

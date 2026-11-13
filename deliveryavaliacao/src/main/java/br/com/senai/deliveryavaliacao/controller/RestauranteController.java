@@ -18,7 +18,7 @@ import br.com.senai.deliveryavaliacao.service.RestauranteService;
 import jakarta.validation.Valid;
 
 @RestController 
-@RequestMapping ("/restaurante")
+@RequestMapping ("/restaurantes")
 public class RestauranteController {
 
     private final RestauranteService restauranteService;
@@ -27,19 +27,11 @@ public class RestauranteController {
         this.restauranteService = restauranteService;
     }
 
-    @PostMapping 
+     @PostMapping 
     public ResponseEntity<Restaurante> cadastrarRestaurante(@Valid @RequestBody Restaurante restaurante) {
-
-        //Optional<Restaurante> restauranteCadastrado = restauranteService.cadastrarRestaurante(restaurante);
-        //if (restauranteCadastrado.isEmpty()){
-         //    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-       // }
-       // return ResponseEntity.status(HttpStatus.CREATED)
-                //.body(restauranteCadastrado.get());
-
-                Restaurante novoRestaurante = restauranteService.cadastrarRestaurante(restaurante);
-                return ResponseEntity.status(HttpStatus.CREATED).body(novoRestaurante);
-       
+        Restaurante novoRestaurante = restauranteService.cadastrarRestaurante(restaurante);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoRestaurante);
+        
     }
 
     @GetMapping
@@ -58,10 +50,10 @@ public class RestauranteController {
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<Restaurante> atualizarSetor(@PathVariable Integer id, @Valid @RequestBody Restaurante restaurante) {
+    public ResponseEntity<Restaurante> atualizarRestaurante(@PathVariable Integer id, @Valid @RequestBody Restaurante restaurante) {
         Restaurante restauranteAtualizado = restauranteService.atualizarRestaurante(id, restaurante);
         return ResponseEntity.ok(restauranteAtualizado);
-    }
-    }
-
     
+
+    }
+    }
